@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListViewSample"
+             xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:dataSource="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
+             xmlns:sfgrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+             x:Class="ListViewSample.NestedListView">
+    <ContentPage.BindingContext>
+        <local:NestedListViewViewModel x:Name="viewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+            <listView:SfListView x:Name="listView"  ItemsSource="{Binding ContactInfo}"
+                                 AutoFitMode="Height" AllowGroupExpandCollapse="True">
+                <listView:SfListView.Behaviors>
+                    <local:OuterListViewBehavior/>
+                </listView:SfListView.Behaviors>
+                <listView:SfListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <StackLayout BackgroundColor="Teal">
+                            <Label Text="{Binding Key}" FontSize="15" Margin="10,0,0,0" TextColor="White" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </listView:SfListView.GroupHeaderTemplate>
+                <listView:SfListView.HeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal" BackgroundColor="Brown">
+                                    <Label Text="Welcome to Syncfusion" TextColor="White" FontSize="18"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </listView:SfListView.HeaderTemplate>
+                <listView:SfListView.FooterTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal" BackgroundColor="Brown">
+                                    <Label Text="Thank You" TextColor="White" FontSize="18"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </listView:SfListView.FooterTemplate>
+                <listView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <local:ExtendedListView x:Name="list1" HeightRequest="{Binding InnerListHeight}" ItemsSource="{Binding ContactDetails}" ItemSize="75">
+                                        <local:ExtendedListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <ViewCell.View>
+                                                        <Grid x:Name="grid" RowSpacing="1" BackgroundColor="#d3d3d3">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="*" />
+                                                                <RowDefinition Height="1" />
+                                                            </Grid.RowDefinitions>
+                                                            <Grid RowSpacing="1">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="50" />
+                                                                    <ColumnDefinition Width="*" />
+                                                                    <ColumnDefinition Width="70" />
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Image Source="{Binding ContactImage}" 
+                                                                       VerticalOptions="Center" HorizontalOptions="Center" 
+                                                                       HeightRequest="50"/>
+
+                                                                <Grid Grid.Column="1" RowSpacing="1" Padding="10,0,0,0" VerticalOptions="Center">
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="*" />
+                                                                        <RowDefinition Height="*" />
+                                                                    </Grid.RowDefinitions>
+
+                                                                    <Label LineBreakMode="NoWrap" TextColor="#474747" Text="{Binding ContactName}">
+                                                                        <Label.FontSize>
+                                                                            <OnPlatform x:TypeArguments="x:Double">
+                                                                                <OnPlatform.WinPhone>
+                                                                                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="20" />
+                                                                                </OnPlatform.WinPhone>
+                                                                                <OnPlatform.Android>
+                                                                                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="18" />
+                                                                                </OnPlatform.Android>
+                                                                                <OnPlatform.iOS>
+                                                                                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="18" />
+                                                                                </OnPlatform.iOS>
+                                                                            </OnPlatform>
+                                                                        </Label.FontSize>
+                                                                    </Label>
+                                                                    <Label Grid.Row="1" Grid.Column="0" TextColor="#474747" LineBreakMode="NoWrap" Text="{Binding ContactNumber}">
+                                                                        <Label.FontSize>
+                                                                            <OnPlatform x:TypeArguments="x:Double">
+                                                                                <OnPlatform.WinPhone>
+                                                                                    <OnIdiom x:TypeArguments="x:Double" Phone="12" Tablet="12" />
+                                                                                </OnPlatform.WinPhone>
+                                                                                <OnPlatform.Android>
+                                                                                    <OnIdiom x:TypeArguments="x:Double" Phone="12" Tablet="14" />
+                                                                                </OnPlatform.Android>
+                                                                                <OnPlatform.iOS>
+                                                                                    <OnIdiom x:TypeArguments="x:Double" Phone="12" Tablet="14" />
+                                                                                </OnPlatform.iOS>
+                                                                            </OnPlatform>
+                                                                        </Label.FontSize>
+                                                                    </Label>
+                                                                </Grid>
+                                                            </Grid>
+                                                            <StackLayout Grid.Row="1" BackgroundColor="Gray" HeightRequest="1"/>
+                                                        </Grid>
+                                                    </ViewCell.View>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </local:ExtendedListView.ItemTemplate>
+                                    </local:ExtendedListView>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </listView:SfListView.ItemTemplate>
+            </listView:SfListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
