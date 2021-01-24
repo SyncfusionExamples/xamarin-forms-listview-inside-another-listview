@@ -44,8 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Images\GroupCollapse.png" />
-    <EmbeddedResource Include="Images\GroupExpand.png" />
     <EmbeddedResource Include="Images\Image0.png" />
     <EmbeddedResource Include="Images\Image1.png" />
     <EmbeddedResource Include="Images\Image10.png" />
@@ -78,10 +76,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="17.2.0.35" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.2.0.34" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPullToRefresh" Version="17.2.0.35" />
-    <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.4.0.35" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
   </ItemGroup>
 
   <ItemGroup>
